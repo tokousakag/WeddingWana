@@ -2,7 +2,8 @@
 <html lang="ms">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Diubah suai untuk sokongan penuh Notch/Dynamic Island pada iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Walimatul Urus Aswana & Hafiz</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +24,7 @@
         </div>
     </div>
 
-    <!-- Music Player -->
+    <!-- Music Player (Floating & Fixed) -->
     <div id="music-toggle" class="music-btn" title="Play/Pause Music">
         <i class="fas fa-music"></i>
         <div class="music-waves">
@@ -144,10 +145,6 @@
                     </div>
                     <h3 class="couple-name">Aswana</h3>
                     <p class="couple-parent">Puteri kepada<br><strong>Encik Maduni</strong><br>&<br><strong>Puan ________</strong></p>
-                    <div class="couple-social">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                    </div>
                 </div>
 
                 <div class="couple-heart-divider animate-on-scroll">
@@ -167,10 +164,6 @@
                     </div>
                     <h3 class="couple-name">Hafiz</h3>
                     <p class="couple-parent">Putera kepada<br><strong>Encik Amiril</strong><br>&<br><strong>Puan ________</strong></p>
-                    <div class="couple-social">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                    </div>
                 </div>
             </div>
         </div>
@@ -189,154 +182,50 @@
             </div>
             
             <div class="events-wrapper">
-                <!-- Khatam Al-Quran -->
                 <div class="event-card animate-on-scroll">
-                    <div class="event-icon">
-                        <i class="fas fa-book-open"></i>
-                    </div>
+                    <div class="event-icon"><i class="fas fa-book-open"></i></div>
                     <h3>Khatam Al-Quran</h3>
-                    <div class="event-detail">
-                        <i class="far fa-calendar"></i>
-                        <p>6 Jun 2026 (Sabtu)</p>
-                    </div>
-                    <div class="event-detail">
-                        <i class="far fa-clock"></i>
-                        <p>1:00 Petang</p>
-                    </div>
-                    <div class="event-detail">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <p>Kampung Gayang, Tuaran</p>
-                    </div>
+                    <div class="event-detail"><i class="far fa-calendar"></i><p>6 Jun 2026 (Sabtu)</p></div>
+                    <div class="event-detail"><i class="far fa-clock"></i><p>1:00 Petang</p></div>
+                    <div class="event-detail"><i class="fas fa-map-marker-alt"></i><p>Kampung Gayang, Tuaran</p></div>
                 </div>
 
-                <!-- Akad Nikah -->
                 <div class="event-card animate-on-scroll">
-                    <div class="event-icon">
-                        <i class="fas fa-mosque"></i>
-                    </div>
+                    <div class="event-icon"><i class="fas fa-mosque"></i></div>
                     <h3>Akad Nikah</h3>
-                    <div class="event-detail">
-                        <i class="far fa-calendar"></i>
-                        <p>6 Jun 2026 (Sabtu)</p>
-                    </div>
-                    <div class="event-detail">
-                        <i class="far fa-clock"></i>
-                        <p>8:00 Malam</p>
-                    </div>
-                    <div class="event-detail">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <p>Kampung Gayang, Tuaran</p>
-                    </div>
+                    <div class="event-detail"><i class="far fa-calendar"></i><p>6 Jun 2026 (Sabtu)</p></div>
+                    <div class="event-detail"><i class="far fa-clock"></i><p>8:00 Malam</p></div>
+                    <div class="event-detail"><i class="fas fa-map-marker-alt"></i><p>Kampung Gayang, Tuaran</p></div>
                 </div>
 
-                <!-- Majlis Utama -->
-                <div class="event-card featured animate-on-scroll" style="flex: 1 1 100%; max-width: 700px; margin: 20px auto 0;">
+                <div class="event-card featured animate-on-scroll">
                     <div class="event-badge">Majlis Utama</div>
                     <div class="event-icon">
                         <i class="fas fa-rings-wedding"></i>
                         <i class="fas fa-glass-cheers"></i>
                     </div>
                     <h3>Walimatul Urus</h3>
-                    <div class="event-detail">
-                        <i class="far fa-calendar"></i>
-                        <p>7 Jun 2026 (Ahad) | 21 Zulhijah 1447H</p>
-                    </div>
-                    <div class="event-detail">
-                        <i class="far fa-clock"></i>
-                        <p>Jamuan: 8:00 Pagi - 5:00 Petang<br>Majlis Sanding: 1:00 Petang</p>
-                    </div>
-                    <div class="event-detail">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <p>Kampung Gayang, Tuaran</p>
-                    </div>
+                    <div class="event-detail"><i class="far fa-calendar"></i><p>7 Jun 2026 (Ahad)</p></div>
+                    <div class="event-detail"><i class="far fa-clock"></i><p>Jamuan: 8:00 Pagi - 5:00 Petang<br>Sanding: 1:00 Petang</p></div>
+                    <div class="event-detail"><i class="fas fa-map-marker-alt"></i><p>Kampung Gayang, Tuaran</p></div>
                     <a href="https://maps.google.com/?q=Kampung+Gayang+Tuaran" target="_blank" class="event-map-btn">
                         <i class="fas fa-directions"></i> Navigasi Maps
                     </a>
                 </div>
             </div>
-
-            <div class="dresscode-section animate-on-scroll">
-                <h3><i class="fas fa-tshirt"></i> Dress Code</h3>
-                <div class="dresscode-colors">
-                    <div class="color-swatch white" data-color="Putih"><span class="color-name">Putih</span></div>
-                    <div class="color-swatch ivory" data-color="Ivory"><span class="color-name">Ivory</span></div>
-                    <div class="color-swatch champagne" data-color="Champagne"><span class="color-name">Champagne</span></div>
-                    <div class="color-swatch gold" data-color="Gold"><span class="color-name">Gold</span></div>
-                </div>
-                <p class="dresscode-note">Tema Putih & Emas — Sila hadir dalam pakaian berwarna putih, ivory, champagne atau emas</p>
-            </div>
         </div>
     </section>
 
-    <!-- Love Story Timeline -->
-    <section id="story" class="story-section">
-        <div class="section-container">
-            <div class="section-header animate-on-scroll">
-                <span class="section-tag">Kisah Cinta</span>
-                <h2>Perjalanan Kami</h2>
-                <div class="ornament-divider">
-                    <span></span><i class="fas fa-diamond"></i><span></span>
-                </div>
-            </div>
-            <div class="timeline">
-                <div class="timeline-item left animate-on-scroll">
-                    <div class="timeline-dot"><i class="fas fa-heart"></i></div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">Mula Bertemu</div>
-                        <h3>Pertemuan Pertama</h3>
-                        <p>Setiap pertemuan ada hikmahnya. Pertemuan kami adalah permulaan kepada sebuah kisah cinta yang indah.</p>
-                    </div>
-                </div>
-                <div class="timeline-item right animate-on-scroll">
-                    <div class="timeline-dot"><i class="fas fa-comments"></i></div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">Mula Mengenali</div>
-                        <h3>Berkenalan</h3>
-                        <p>Dari sekadar salam, menjadi perbualan yang tiada penghujung. Kami mula mengenali hati masing-masing.</p>
-                    </div>
-                </div>
-                <div class="timeline-item left animate-on-scroll">
-                    <div class="timeline-dot"><i class="fas fa-ring"></i></div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">Merisik & Meminang</div>
-                        <h3>Bertunang</h3>
-                        <p>Dengan restu keluarga, kami mengikat janji untuk bersama. Alhamdulillah, semuanya dipermudahkan.</p>
-                    </div>
-                </div>
-                <div class="timeline-item right animate-on-scroll">
-                    <div class="timeline-dot"><i class="fas fa-mosque"></i></div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">Jun 2026</div>
-                        <h3>Akad & Walimatul Urus</h3>
-                        <p>InsyaAllah, dengan berkat doa semua, kami akan disatukan dalam ikatan yang suci pada 6 & 7 Jun 2026 ini.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sila rujuk fail anda sebelum ini untuk kod Gallery, Wishes, RSVP, Gift & Contact - biarkan sama -->
-    <!-- Saya sertakan bahagian penutup (Footer) di bawah -->
-    
     <footer class="footer">
         <div class="footer-content">
-            <div class="footer-ornament">
-                <i class="fas fa-heart"></i>
-            </div>
             <h2 class="footer-names">Aswana & Hafiz</h2>
             <p class="footer-quote">"Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan hidup dari jenismu sendiri..."</p>
-            <p class="footer-quran">— Surah Ar-Rum, 30:21 —</p>
-            <div class="footer-divider"></div>
-            <p class="footer-thanks">Terima kasih atas doa restu anda</p>
-            <p class="footer-copyright">&copy; 2026 Aswana & Hafiz — Dengan Cinta</p>
+            <p class="footer-copyright">&copy; 2026 Aswana & Hafiz — Terma Kasih</p>
         </div>
     </footer>
 
-    <button id="back-to-top" class="back-to-top" title="Kembali ke atas">
-        <i class="fas fa-chevron-up"></i>
-    </button>
-
-    <audio id="bg-music" loop preload="auto">
+    <!-- Wajib ditambah 'playsinline' & 'webkit-playsinline' untuk iOS Safari -->
+    <audio id="bg-music" loop preload="auto" playsinline webkit-playsinline>
         <source src="assets/music/wedding-song.mp3" type="audio/mpeg">
     </audio>
 
