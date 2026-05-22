@@ -1,6 +1,6 @@
 /* ============================================
    WEDDING INVITATION — ASWANA & HAFIZ
-   Main JavaScript (Mobile-Optimized for Cerah/Floral Theme)
+   Main JavaScript (Mobile-Optimized)
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -11,9 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initHeroParticles();
     initFloatingPetals();
     initMusicPlayer();
-    initRSVPForm();
     initWishesForm();
-    initCopyButtons();
     initBackToTop();
     initSmoothScroll();
 });
@@ -94,8 +92,8 @@ function initNavbar() {
 /* ---------- Scroll Animations ---------- */
 function initScrollAnimations() {
     const observerOptions = {
-        threshold: 0.08,
-        rootMargin: '0px 0px -20px 0px'
+        threshold: 0.1,
+        rootMargin: '0px 0px -30px 0px'
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -103,7 +101,7 @@ function initScrollAnimations() {
             if (entry.isIntersecting) {
                 setTimeout(() => {
                     entry.target.classList.add('animated');
-                }, index * 60);
+                }, index * 80);
                 observer.unobserve(entry.target);
             }
         });
@@ -114,7 +112,7 @@ function initScrollAnimations() {
     });
 }
 
-/* ---------- Countdown Timer Ke 7 Jun 2026 ---------- */
+/* ---------- Countdown Timer ---------- */
 function initCountdown() {
     const weddingDate = new Date('2026-06-07T08:00:00+08:00').getTime();
     const daysEl = document.getElementById('days');
@@ -151,12 +149,12 @@ function initCountdown() {
     setInterval(updateCountdown, 1000);
 }
 
-/* ---------- Hero Glitter Particles ---------- */
+/* ---------- Hero Particles ---------- */
 function initHeroParticles() {
     const container = document.getElementById('hero-particles');
     if (!container) return;
     
-    const particleCount = window.innerWidth < 768 ? 20 : 40;
+    const particleCount = window.innerWidth < 768 ? 20 : 35;
 
     for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
@@ -171,7 +169,7 @@ function initHeroParticles() {
     }
 }
 
-/* ---------- Floating Floral Petals ---------- */
+/* ---------- Floating Petals ---------- */
 function initFloatingPetals() {
     const container = document.getElementById('petals-container');
     if (!container) return;
@@ -182,18 +180,17 @@ function initFloatingPetals() {
         const petal = document.createElement('div');
         petal.classList.add('petal');
 
-        const size = Math.random() * 10 + 6;
+        const size = Math.random() * 12 + 6;
         petal.style.width = size + 'px';
         petal.style.height = size + 'px';
         petal.style.left = Math.random() * 100 + '%';
         petal.style.animationDuration = (Math.random() * 5 + 6) + 's';
         petal.style.animationDelay = Math.random() * 1 + 's';
-        petal.style.opacity = Math.random() * 0.25 + 0.15;
+        petal.style.opacity = Math.random() * 0.25 + 0.1;
 
-        // Ditukarkan kepada palet warna kelopak bunga putih gading & keemasan lembut mengikut tema kad fizikal
         const hue = Math.random() > 0.5 ? 
             `radial-gradient(ellipse at center, rgba(223, 207, 157, 0.7), rgba(179, 146, 70, 0.4))` : 
-            `radial-gradient(ellipse at center, rgba(255, 255, 255, 0.8), rgba(247, 244, 238, 0.5))`;
+            `radial-gradient(ellipse at center, rgba(255, 255, 255, 0.7), rgba(247, 244, 238, 0.4))`;
         petal.style.background = hue;
 
         container.appendChild(petal);
@@ -205,12 +202,12 @@ function initFloatingPetals() {
 
     const initialPetals = window.innerWidth < 768 ? 3 : 6;
     for (let i = 0; i < initialPetals; i++) {
-        setTimeout(createPetal, i * 600);
+        setTimeout(createPetal, i * 500);
     }
-    setInterval(createPetal, window.innerWidth < 768 ? 3000 : 1800);
+    setInterval(createPetal, window.innerWidth < 768 ? 3000 : 2000);
 }
 
-/* ---------- Music Player (iOS Bypass Logic) ---------- */
+/* ---------- Music Player (Bypass iOS restriction) ---------- */
 function initMusicPlayer() {
     const musicBtn = document.getElementById('music-toggle');
     const audio = document.getElementById('bg-music');
@@ -234,7 +231,6 @@ function initMusicPlayer() {
         });
     }
 
-    // Memintas sekatan autoplay Safari iOS / Android browser melalui sebarang interaksi sentuhan skrin pintar pertama
     document.addEventListener('click', playWeddingMusic, { once: true });
     document.addEventListener('touchstart', playWeddingMusic, { once: true });
 
@@ -302,28 +298,6 @@ function initMusicPlayer() {
     }
 }
 
-/* ---------- RSVP Form ---------- */
-function initRSVPForm() {
-    const form = document.getElementById('rsvp-form');
-    const modal = document.getElementById('success-modal');
-    const modalClose = document.getElementById('modal-close');
-
-    if (!form || !modal) return;
-
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        modal.classList.add('active');
-        form.reset();
-    });
-
-    if (modalClose) {
-        modalClose.addEventListener('click', () => { modal.classList.remove('active'); });
-    }
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) modal.classList.remove('active');
-    });
-}
-
 /* ---------- Wishes Form ---------- */
 function initWishesForm() {
     const form = document.getElementById('wishes-form');
@@ -352,14 +326,14 @@ function initWishesForm() {
 
             wall.insertBefore(wishCard, wall.firstChild);
             wishCard.style.opacity = '0';
-            wishCard.style.transform = 'translateY(10px)';
+            wishCard.style.transform = 'translateY(15px)';
             
             requestAnimationFrame(() => {
                 setTimeout(() => {
-                    wishCard.style.transition = 'all 0.4s ease';
+                    wishCard.style.transition = 'all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
                     wishCard.style.opacity = '1';
                     wishCard.style.transform = 'translateY(0)';
-                }, 20);
+                }, 30);
             });
 
             form.reset();
@@ -375,54 +349,13 @@ function escapeHtml(str) {
     return div.innerHTML;
 }
 
-/* ---------- Copy Buttons ---------- */
-function initCopyButtons() {
-    document.querySelectorAll('.btn-copy').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            const text = btn.getAttribute('data-copy');
-            if (!text) return;
-
-            if (navigator.clipboard && window.isSecureContext) {
-                navigator.clipboard.writeText(text).then(() => { handleCopySuccess(btn); });
-            } else {
-                const textArea = document.createElement('textarea');
-                textArea.value = text;
-                textArea.style.position = 'fixed';
-                document.body.appendChild(textArea);
-                textArea.focus();
-                textArea.select();
-                try {
-                    document.execCommand('copy');
-                    handleCopySuccess(btn);
-                } catch (err) {
-                    console.error(err);
-                }
-                document.body.removeChild(textArea);
-            }
-        });
-    });
-}
-
-function handleCopySuccess(btn) {
-    const originalHTML = btn.innerHTML;
-    btn.innerHTML = '<i class="fas fa-check"></i> Disalin!';
-    btn.style.background = 'var(--gold)';
-    btn.style.color = 'var(--white)';
-    setTimeout(() => {
-        btn.innerHTML = originalHTML;
-        btn.style.background = '';
-        btn.style.color = '';
-    }, 2000);
-}
-
 /* ---------- Back to Top ---------- */
 function initBackToTop() {
     const btn = document.getElementById('back-to-top');
     if (!btn) return;
 
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
+        if (window.scrollY > 400) {
             btn.classList.add('visible');
         } else {
             btn.classList.remove('visible');
@@ -441,10 +374,11 @@ function initSmoothScroll() {
         anchor.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
             if (href === '#') return;
+            
             const target = document.querySelector(href);
             if (target) {
                 e.preventDefault();
-                const offset = window.innerWidth < 768 ? 50 : 70;
+                const offset = window.innerWidth < 768 ? 60 : 80;
                 const targetPos = target.getBoundingClientRect().top + window.scrollY - offset;
                 window.scrollTo({ top: targetPos, behavior: 'smooth' });
             }
