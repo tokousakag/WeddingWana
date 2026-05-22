@@ -1,5 +1,5 @@
 /* ============================================
-   WEDDING INVITATION — ASWANA & B
+   WEDDING INVITATION — ASWANA & HAFIZ
    Main JavaScript
    ============================================ */
 
