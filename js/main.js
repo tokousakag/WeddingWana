@@ -1,6 +1,6 @@
 /* ============================================
    WEDDING INVITATION — ASWANA & HAFIZ
-   Main JavaScript (Mobile-Optimized for iOS & Android)
+   Main JavaScript (Mobile-Optimized for Cerah/Floral Theme)
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -20,7 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* ---------- Preloader ---------- */
 function initPreloader() {
-    // Memastikan tingkap kandungan sempat dimuat naik sepenuhnya
     const handleLoad = () => {
         setTimeout(() => {
             const preloader = document.getElementById('preloader');
@@ -28,9 +27,9 @@ function initPreloader() {
                 preloader.classList.add('hidden');
                 setTimeout(() => {
                     preloader.style.display = 'none';
-                }, 800);
+                }, 600);
             }
-        }, 1500); // Dikurangkan kepada 1.5s untuk tindak balas mobile yang lebih pantas
+        }, 1200);
     };
 
     if (document.readyState === 'complete') {
@@ -50,13 +49,13 @@ function initNavbar() {
     if (!navbar || !navToggle || !navMenu) return;
 
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 60) { // Dikurangkan jarak skrol bersesuaian dengan peranti mobile
+        if (window.scrollY > 50) {
             navbar.classList.add('scrolled');
         } else {
             navbar.classList.remove('scrolled');
         }
         updateActiveNav();
-    }, { passive: true }); // Menggunakan passive listener untuk mengoptimumkan prestasi skrol mobile
+    }, { passive: true });
 
     navToggle.addEventListener('click', (e) => {
         e.preventDefault();
@@ -73,7 +72,7 @@ function initNavbar() {
 
     function updateActiveNav() {
         const sections = document.querySelectorAll('section[id]');
-        const scrollPos = window.scrollY + 120; // Diubah suai bersesuaian dengan kelebaran skrin mobile
+        const scrollPos = window.scrollY + 100;
 
         sections.forEach(section => {
             const top = section.offsetTop;
@@ -95,8 +94,8 @@ function initNavbar() {
 /* ---------- Scroll Animations ---------- */
 function initScrollAnimations() {
     const observerOptions = {
-        threshold: 0.1, // Dikurangkan nilai ambang agar mudah dipicu pada skrin sempit peranti mobile
-        rootMargin: '0px 0px -30px 0px'
+        threshold: 0.08,
+        rootMargin: '0px 0px -20px 0px'
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -104,7 +103,7 @@ function initScrollAnimations() {
             if (entry.isIntersecting) {
                 setTimeout(() => {
                     entry.target.classList.add('animated');
-                }, index * 80);
+                }, index * 60);
                 observer.unobserve(entry.target);
             }
         });
@@ -115,9 +114,8 @@ function initScrollAnimations() {
     });
 }
 
-/* ---------- Countdown Timer ---------- */
+/* ---------- Countdown Timer Ke 7 Jun 2026 ---------- */
 function initCountdown() {
-    // Diubah suai terus ke tarikh perkahwinan sebenar: Ahad, 7 Jun 2026 (Jam 8:00 Pagi)
     const weddingDate = new Date('2026-06-07T08:00:00+08:00').getTime();
     const daysEl = document.getElementById('days');
     const hoursEl = document.getElementById('hours');
@@ -153,20 +151,19 @@ function initCountdown() {
     setInterval(updateCountdown, 1000);
 }
 
-/* ---------- Hero Particles ---------- */
+/* ---------- Hero Glitter Particles ---------- */
 function initHeroParticles() {
     const container = document.getElementById('hero-particles');
     if (!container) return;
     
-    // Jumlah partikel dikurangkan daripada 50 ke 25 bagi meringankan beban GPU/Bateri telefon pintar
-    const particleCount = window.innerWidth < 768 ? 25 : 50;
+    const particleCount = window.innerWidth < 768 ? 20 : 40;
 
     for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
         particle.classList.add('hero-particle');
         particle.style.left = Math.random() * 100 + '%';
         particle.style.top = Math.random() * 100 + '%';
-        particle.style.width = (Math.random() * 3 + 2) + 'px';
+        particle.style.width = (Math.random() * 3 + 1.5) + 'px';
         particle.style.height = particle.style.width;
         particle.style.animationDelay = Math.random() * 4 + 's';
         particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
@@ -174,28 +171,29 @@ function initHeroParticles() {
     }
 }
 
-/* ---------- Floating Petals ---------- */
+/* ---------- Floating Floral Petals ---------- */
 function initFloatingPetals() {
     const container = document.getElementById('petals-container');
     if (!container) return;
 
     function createPetal() {
-        if (document.hidden) return; // Menghalang pembentukan elemen baru jika tab pelayar ditutup (jimat RAM mobile)
+        if (document.hidden) return;
         
         const petal = document.createElement('div');
         petal.classList.add('petal');
 
-        const size = Math.random() * 12 + 6; // Dikecilkan sedikit saiz kelopak agar kelihatan lebih kemas di skrin kecil
+        const size = Math.random() * 10 + 6;
         petal.style.width = size + 'px';
         petal.style.height = size + 'px';
         petal.style.left = Math.random() * 100 + '%';
-        petal.style.animationDuration = (Math.random() * 6 + 6) + 's';
-        petal.style.animationDelay = Math.random() * 2 + 's';
-        petal.style.opacity = Math.random() * 0.3 + 0.1;
+        petal.style.animationDuration = (Math.random() * 5 + 6) + 's';
+        petal.style.animationDelay = Math.random() * 1 + 's';
+        petal.style.opacity = Math.random() * 0.25 + 0.15;
 
+        // Ditukarkan kepada palet warna kelopak bunga putih gading & keemasan lembut mengikut tema kad fizikal
         const hue = Math.random() > 0.5 ? 
-            `radial-gradient(ellipse at center, rgba(232, 212, 139, 0.8), rgba(201, 168, 76, 0.6))` : 
-            `radial-gradient(ellipse at center, rgba(255, 255, 255, 0.6), rgba(245, 240, 232, 0.4))`;
+            `radial-gradient(ellipse at center, rgba(223, 207, 157, 0.7), rgba(179, 146, 70, 0.4))` : 
+            `radial-gradient(ellipse at center, rgba(255, 255, 255, 0.8), rgba(247, 244, 238, 0.5))`;
         petal.style.background = hue;
 
         container.appendChild(petal);
@@ -205,18 +203,14 @@ function initFloatingPetals() {
         });
     }
 
-    // Mengoptimumkan jumlah kelopak terapung berdasarkan kelebaran paparan skrin
-    const initialPetals = window.innerWidth < 768 ? 4 : 8;
-    const intervalTime = window.innerWidth < 768 ? 3500 : 2000;
-
+    const initialPetals = window.innerWidth < 768 ? 3 : 6;
     for (let i = 0; i < initialPetals; i++) {
-        setTimeout(createPetal, i * 500);
+        setTimeout(createPetal, i * 600);
     }
-
-    setInterval(createPetal, intervalTime);
+    setInterval(createPetal, window.innerWidth < 768 ? 3000 : 1800);
 }
 
-/* ---------- Music Player (iOS & Android Autoplay Bypass) ---------- */
+/* ---------- Music Player (iOS Bypass Logic) ---------- */
 function initMusicPlayer() {
     const musicBtn = document.getElementById('music-toggle');
     const audio = document.getElementById('bg-music');
@@ -229,32 +223,23 @@ function initMusicPlayer() {
     let melodyInterval;
     let usingWebAudio = false;
 
-    // Fungsi utama pencetus audio fail mp3 / fallback Web Audio
     function playWeddingMusic() {
         if (isPlaying) return;
-
         audio.play().then(() => {
             isPlaying = true;
             musicBtn.classList.add('playing');
             usingWebAudio = false;
-        }).catch((error) => {
-            console.log("Audio file disekat sekatan pelayar, mencuba Web Audio API fallback...", error);
-            // Jika mp3 disekat oleh polisi autoplay iOS Safari / Chrome, gunakan fallback bunyi sintetik
-            if (!isPlaying) {
-                playWebAudioMelody();
-            }
+        }).catch(() => {
+            if (!isPlaying) playWebAudioMelody();
         });
     }
 
-    // Memintas sekatan keselamatan Autoplay peranti mudah alih (iOS/Android) melalui interaksi pertama skrin
+    // Memintas sekatan autoplay Safari iOS / Android browser melalui sebarang interaksi sentuhan skrin pintar pertama
     document.addEventListener('click', playWeddingMusic, { once: true });
     document.addEventListener('touchstart', playWeddingMusic, { once: true });
-    document.addEventListener('touchend', playWeddingMusic, { once: true });
 
-    // Kawalan butang klik manual play/pause
     musicBtn.addEventListener('click', (e) => {
-        e.stopPropagation(); // Menghalang pencetus event berulang pada peringkat dokumen
-        
+        e.stopPropagation();
         if (!isPlaying) {
             audio.play().then(() => {
                 isPlaying = true;
@@ -282,66 +267,38 @@ function initMusicPlayer() {
             usingWebAudio = true;
 
             const notes = [
-                { freq: 523.25, dur: 0.5 },  // C5
-                { freq: 587.33, dur: 0.5 },  // D5
-                { freq: 659.25, dur: 0.75 }, // E5
-                { freq: 523.25, dur: 0.25 }, // C5
-                { freq: 659.25, dur: 0.5 },  // E5
-                { freq: 698.46, dur: 0.5 },  // F5
-                { freq: 783.99, dur: 1.0 },  // G5
-                { freq: 783.99, dur: 0.5 },  // G5
-                { freq: 880.00, dur: 0.5 },  // A5
-                { freq: 783.99, dur: 0.5 },  // G5
-                { freq: 698.46, dur: 0.5 },  // F5
-                { freq: 659.25, dur: 1.0 },  // E5
-                { freq: 523.25, dur: 0.5 },  // C5
-                { freq: 587.33, dur: 0.5 },  // D5
-                { freq: 523.25, dur: 1.0 },  // C5
-                { freq: 0, dur: 0.5 },       // Rest
+                { freq: 523.25, dur: 0.5 }, { freq: 587.33, dur: 0.5 }, { freq: 659.25, dur: 0.75 }, 
+                { freq: 523.25, dur: 0.25 }, { freq: 659.25, dur: 0.5 }, { freq: 698.46, dur: 0.5 }, 
+                { freq: 783.99, dur: 1.0 }, { freq: 783.99, dur: 0.5 }, { freq: 880.00, dur: 0.5 }
             ];
 
             let noteIndex = 0;
-
             function playNote() {
                 if (!isPlaying || !audioContext) return;
-
                 const note = notes[noteIndex % notes.length];
-                
                 if (note.freq > 0) {
                     oscillator = audioContext.createOscillator();
                     gainNode = audioContext.createGain();
-                    
                     oscillator.type = 'sine';
                     oscillator.frequency.setValueAtTime(note.freq, audioContext.currentTime);
-                    
                     gainNode.gain.setValueAtTime(0, audioContext.currentTime);
-                    gainNode.gain.linearRampToValueAtTime(0.05, audioContext.currentTime + 0.05);
-                    gainNode.gain.linearRampToValueAtTime(0.02, audioContext.currentTime + note.dur * 0.7);
+                    gainNode.gain.linearRampToValueAtTime(0.04, audioContext.currentTime + 0.05);
                     gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + note.dur);
-                    
                     oscillator.connect(gainNode);
                     gainNode.connect(audioContext.destination);
-                    
                     oscillator.start(audioContext.currentTime);
                     oscillator.stop(audioContext.currentTime + note.dur);
                 }
-
                 noteIndex++;
                 melodyInterval = setTimeout(playNote, note.dur * 1000);
             }
-
             playNote();
-        } catch (e) {
-            console.log("Web Audio API tidak disokong pada pelayar ini", e);
-        }
+        } catch (err) { console.log(err); }
     }
 
     function stopWebAudioMelody() {
         if (melodyInterval) clearTimeout(melodyInterval);
-        if (audioContext) {
-            audioContext.close();
-            audioContext = null;
-        }
+        if (audioContext) { audioContext.close(); audioContext = null; }
     }
 }
 
@@ -355,32 +312,15 @@ function initRSVPForm() {
 
     form.addEventListener('submit', (e) => {
         e.preventDefault();
-
-        const formData = {
-            name: document.getElementById('rsvp-name').value,
-            phone: document.getElementById('rsvp-phone').value,
-            email: document.getElementById('rsvp-email')?.value || '',
-            guests: document.getElementById('rsvp-guests').value,
-            attendance: document.querySelector('input[name="attendance"]:checked')?.value,
-            message: document.getElementById('rsvp-message').value
-        };
-
-        console.log('RSVP Data Submitted:', formData);
-
         modal.classList.add('active');
         form.reset();
     });
 
     if (modalClose) {
-        modalClose.addEventListener('click', () => {
-            modal.classList.remove('active');
-        });
+        modalClose.addEventListener('click', () => { modal.classList.remove('active'); });
     }
-
     modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.classList.remove('active');
-        }
+        if (e.target === modal) modal.classList.remove('active');
     });
 }
 
@@ -393,7 +333,6 @@ function initWishesForm() {
 
     form.addEventListener('submit', (e) => {
         e.preventDefault();
-
         const nameEl = document.getElementById('wish-name');
         const messageEl = document.getElementById('wish-message');
 
@@ -412,21 +351,18 @@ function initWishesForm() {
             `;
 
             wall.insertBefore(wishCard, wall.firstChild);
-
-            // Trigger animation smooth
             wishCard.style.opacity = '0';
-            wishCard.style.transform = 'translateY(15px)';
+            wishCard.style.transform = 'translateY(10px)';
             
             requestAnimationFrame(() => {
                 setTimeout(() => {
-                    wishCard.style.transition = 'all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                    wishCard.style.transition = 'all 0.4s ease';
                     wishCard.style.opacity = '1';
                     wishCard.style.transform = 'translateY(0)';
-                }, 30);
+                }, 20);
             });
 
             form.reset();
-            // Menghilangkan fokus keyboard pada mobile sebaik sahaja selesai menghantar
             nameEl.blur();
             messageEl.blur();
         }
@@ -445,19 +381,14 @@ function initCopyButtons() {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
             const text = btn.getAttribute('data-copy');
-            
             if (!text) return;
 
-            // Reka bentuk salinan hibrid untuk keserasian optimum pelayar iOS Safari & Android WebView
             if (navigator.clipboard && window.isSecureContext) {
-                navigator.clipboard.writeText(text).then(() => {
-                    handleCopySuccess(btn);
-                });
+                navigator.clipboard.writeText(text).then(() => { handleCopySuccess(btn); });
             } else {
-                // Fallback cara lama sekiranya fungsi pengesahan SecureContext gagal
                 const textArea = document.createElement('textarea');
                 textArea.value = text;
-                textArea.style.position = 'fixed'; // Mengelakkan skrin skrol melompat pada mobile
+                textArea.style.position = 'fixed';
                 document.body.appendChild(textArea);
                 textArea.focus();
                 textArea.select();
@@ -465,7 +396,7 @@ function initCopyButtons() {
                     document.execCommand('copy');
                     handleCopySuccess(btn);
                 } catch (err) {
-                    console.error('Gagal menyalin teks: ', err);
+                    console.error(err);
                 }
                 document.body.removeChild(textArea);
             }
@@ -491,7 +422,7 @@ function initBackToTop() {
     if (!btn) return;
 
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 400) {
+        if (window.scrollY > 300) {
             btn.classList.add('visible');
         } else {
             btn.classList.remove('visible');
@@ -510,11 +441,10 @@ function initSmoothScroll() {
         anchor.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
             if (href === '#') return;
-            
             const target = document.querySelector(href);
             if (target) {
                 e.preventDefault();
-                const offset = window.innerWidth < 768 ? 60 : 80; // Suasana offset dikecilkan pada peranti mobile
+                const offset = window.innerWidth < 768 ? 50 : 70;
                 const targetPos = target.getBoundingClientRect().top + window.scrollY - offset;
                 window.scrollTo({ top: targetPos, behavior: 'smooth' });
             }
