@@ -1,4 +1,4 @@
-# Walimatul Urus Aswana & B 💍
+# Walimatul Urus Aswana & Hafiz 💍
 
 Laman web jemputan perkahwinan digital yang elegan dengan tema putih dan emas.
 
