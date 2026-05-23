@@ -11,9 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initHeroParticles();
     initFloatingPetals();
     initMusicPlayer();
-    initWishesForm();
     initBackToTop();
-    initSmoothScroll();
 });
 
 /* ---------- Preloader ---------- */
@@ -23,18 +21,13 @@ function initPreloader() {
             const preloader = document.getElementById('preloader');
             if (preloader) {
                 preloader.classList.add('hidden');
-                setTimeout(() => {
-                    preloader.style.display = 'none';
-                }, 600);
+                setTimeout(() => { preloader.style.display = 'none'; }, 600);
             }
-        }, 1200);
+        }, 800);
     };
 
-    if (document.readyState === 'complete') {
-        handleLoad();
-    } else {
-        window.addEventListener('load', handleLoad);
-    }
+    if (document.readyState === 'complete') handleLoad();
+    else window.addEventListener('load', handleLoad);
 }
 
 /* ---------- Navbar ---------- */
@@ -47,11 +40,8 @@ function initNavbar() {
     if (!navbar || !navToggle || !navMenu) return;
 
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
+        if (window.scrollY > 50) navbar.classList.add('scrolled');
+        else navbar.classList.remove('scrolled');
         updateActiveNav();
     }, { passive: true });
 
@@ -80,16 +70,14 @@ function initNavbar() {
             if (scrollPos >= top && scrollPos < top + height) {
                 navLinks.forEach(link => {
                     link.classList.remove('active');
-                    if (link.getAttribute('href') === '#' + id) {
-                        link.classList.add('active');
-                    }
+                    if (link.getAttribute('href') === '#' + id) link.classList.add('active');
                 });
             }
         });
     }
 }
 
-/* ---------- Scroll Animations ---------- */
+/* ---------- Scroll Animations (Masuk Fade-In-Only) ---------- */
 function initScrollAnimations() {
     const observerOptions = {
         threshold: 0.1,
@@ -107,7 +95,8 @@ function initScrollAnimations() {
         });
     }, observerOptions);
 
-    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+    // Pastikan menangkap kedua-dua jenis kelas animasi
+    document.querySelectorAll('.animate-on-scroll, .fade-in-only').forEach(el => {
         observer.observe(el);
     });
 }
@@ -127,10 +116,8 @@ function initCountdown() {
         const distance = weddingDate - now;
 
         if (distance < 0) {
-            daysEl.textContent = '00';
-            hoursEl.textContent = '00';
-            minutesEl.textContent = '00';
-            secondsEl.textContent = '00';
+            daysEl.textContent = '00'; hoursEl.textContent = '00';
+            minutesEl.textContent = '00'; secondsEl.textContent = '00';
             return;
         }
 
@@ -195,15 +182,11 @@ function initFloatingPetals() {
 
         container.appendChild(petal);
 
-        petal.addEventListener('animationend', () => {
-            petal.remove();
-        });
+        petal.addEventListener('animationend', () => { petal.remove(); });
     }
 
     const initialPetals = window.innerWidth < 768 ? 3 : 6;
-    for (let i = 0; i < initialPetals; i++) {
-        setTimeout(createPetal, i * 500);
-    }
+    for (let i = 0; i < initialPetals; i++) { setTimeout(createPetal, i * 500); }
     setInterval(createPetal, window.innerWidth < 768 ? 3000 : 2000);
 }
 
@@ -241,15 +224,10 @@ function initMusicPlayer() {
                 isPlaying = true;
                 musicBtn.classList.add('playing');
                 usingWebAudio = false;
-            }).catch(() => {
-                playWebAudioMelody();
-            });
+            }).catch(() => { playWebAudioMelody(); });
         } else {
-            if (usingWebAudio) {
-                stopWebAudioMelody();
-            } else {
-                audio.pause();
-            }
+            if (usingWebAudio) stopWebAudioMelody();
+            else audio.pause();
             isPlaying = false;
             musicBtn.classList.remove('playing');
         }
@@ -298,90 +276,18 @@ function initMusicPlayer() {
     }
 }
 
-/* ---------- Wishes Form ---------- */
-function initWishesForm() {
-    const form = document.getElementById('wishes-form');
-    const wall = document.getElementById('wishes-wall');
-
-    if (!form || !wall) return;
-
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const nameEl = document.getElementById('wish-name');
-        const messageEl = document.getElementById('wish-message');
-
-        const name = nameEl.value.trim();
-        const message = messageEl.value.trim();
-
-        if (name && message) {
-            const wishCard = document.createElement('div');
-            wishCard.classList.add('wish-card');
-            wishCard.innerHTML = `
-                <div class="wish-avatar"><i class="fas fa-user-circle"></i></div>
-                <div class="wish-content">
-                    <h4>${escapeHtml(name)}</h4>
-                    <p>"${escapeHtml(message)}"</p>
-                </div>
-            `;
-
-            wall.insertBefore(wishCard, wall.firstChild);
-            wishCard.style.opacity = '0';
-            wishCard.style.transform = 'translateY(15px)';
-            
-            requestAnimationFrame(() => {
-                setTimeout(() => {
-                    wishCard.style.transition = 'all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-                    wishCard.style.opacity = '1';
-                    wishCard.style.transform = 'translateY(0)';
-                }, 30);
-            });
-
-            form.reset();
-            nameEl.blur();
-            messageEl.blur();
-        }
-    });
-}
-
-function escapeHtml(str) {
-    const div = document.createElement('div');
-    div.textContent = str;
-    return div.innerHTML;
-}
-
 /* ---------- Back to Top ---------- */
 function initBackToTop() {
     const btn = document.getElementById('back-to-top');
     if (!btn) return;
 
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 400) {
-            btn.classList.add('visible');
-        } else {
-            btn.classList.remove('visible');
-        }
+        if (window.scrollY > 400) btn.classList.add('visible');
+        else btn.classList.remove('visible');
     }, { passive: true });
 
     btn.addEventListener('click', (e) => {
         e.preventDefault();
         window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-}
-
-/* ---------- Smooth Scroll ---------- */
-function initSmoothScroll() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const href = this.getAttribute('href');
-            if (href === '#') return;
-            
-            const target = document.querySelector(href);
-            if (target) {
-                e.preventDefault();
-                const offset = window.innerWidth < 768 ? 60 : 80;
-                const targetPos = target.getBoundingClientRect().top + window.scrollY - offset;
-                window.scrollTo({ top: targetPos, behavior: 'smooth' });
-            }
-        });
     });
 }
