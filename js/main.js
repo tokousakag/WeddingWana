@@ -1,368 +1,284 @@
-/* ==========================================================================
+/* ============================================
    WEDDING INVITATION — ASWANA & HAFIZ
-   Theme: Pink Rose Gold · Gold Accent
-   ========================================================================== */
+   Main JavaScript (Mobile-Optimized)
+   ============================================ */
 
-:root {
-    --white: #ffffff;
-    --off-white: #fdf8f8;
-    --bg-warm: #fef5f5;
-
-    /* Rose Gold palette */
-    --rose:        #e8a4a4;
-    --rose-light:  #f5d5d5;
-    --rose-pale:   #fce9e9;
-    --rose-deep:   #c97070;
-    --rose-dark:   #a04d4d;
-
-    /* Gold accent (kekal dari tema asal) */
-    --gold:        #b39246;
-    --gold-dark:   #8c6f2d;
-    --gold-light:  #dfcf9d;
-    --gold-pale:   #f7f0df;
-
-    /* Text */
-    --text-dark:   #4a3232;
-    --text-medium: #7a5c5c;
-    --text-light:  #a88888;
-
-    /* Theme swatches */
-    --theme-yellow: #fdf5d3;
-    --theme-pink:   #fce9ef;
-
-    --shadow-soft: 0 8px 30px rgba(168, 100, 100, 0.08);
-    --transition:  all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-
-    --font-display: 'Playfair Display', serif;
-    --font-script:  'Great Vibes', cursive;
-    --font-body:    'Cormorant Garamond', serif;
-    --font-sans:    'Montserrat', sans-serif;
-}
-
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; font-size: 16px; -webkit-text-size-adjust: 100%; }
-body {
-    font-family: var(--font-body);
-    color: var(--text-dark);
-    background-color: var(--bg-warm);
-    overflow-x: hidden;
-    line-height: 1.6;
-    -webkit-overflow-scrolling: touch;
-}
-a, button, .music-btn, .nav-toggle { text-decoration: none; color: inherit; touch-action: manipulation; }
-img { max-width: 100%; height: auto; }
-section[id] { scroll-margin-top: 85px; }
+document.addEventListener('DOMContentLoaded', () => {
+    initPreloader();
+    initNavbar();
+    initScrollAnimations();
+    initCountdown();
+    initHeroParticles();
+    initFloatingPetals();
+    initMusicPlayer();
+    initBackToTop();
+});
 
 /* ---------- Preloader ---------- */
-#preloader {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: var(--bg-warm);
-    display: flex; align-items: center; justify-content: center;
-    z-index: 99999;
-    transition: opacity 0.6s ease, visibility 0.6s ease;
-}
-#preloader.hidden { opacity: 0; visibility: hidden; }
-.heart-loader {
-    animation: heartbeat 1.2s infinite;
-    color: var(--rose-deep); font-size: 3rem; margin-bottom: 1rem; text-align: center;
-}
-@keyframes heartbeat { 0%, 100% { transform: scale(1); } 25% { transform: scale(1.15); } }
-.loader-text { font-family: var(--font-script); font-size: 2.2rem; color: var(--rose-dark); letter-spacing: 2px; }
+function initPreloader() {
+    const handleLoad = () => {
+        setTimeout(() => {
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                preloader.classList.add('hidden');
+                setTimeout(() => { preloader.style.display = 'none'; }, 600);
+            }
+        }, 800);
+    };
 
-/* ---------- Music Button ---------- */
-.music-btn {
-    position: fixed;
-    bottom: calc(25px + env(safe-area-inset-bottom));
-    left: calc(25px + env(safe-area-inset-left));
-    width: 50px; height: 50px; border-radius: 50%;
-    background: var(--white);
-    border: 1px solid var(--rose-light);
-    color: var(--rose-deep);
-    font-size: 1.1rem; z-index: 9999;
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: var(--shadow-soft);
-    transition: var(--transition); cursor: pointer;
-}
-.music-btn.playing .fa-music { display: none; }
-.music-waves { display: none; align-items: flex-end; gap: 2px; height: 16px; }
-.music-btn.playing .music-waves { display: flex; }
-.music-waves span { width: 2.5px; background: var(--rose-deep); border-radius: 2px; animation: wave 0.8s ease-in-out infinite; }
-.music-waves span:nth-child(1) { height: 6px;  animation-delay: 0s; }
-.music-waves span:nth-child(2) { height: 14px; animation-delay: 0.15s; }
-.music-waves span:nth-child(3) { height: 9px;  animation-delay: 0.3s; }
-.music-waves span:nth-child(4) { height: 12px; animation-delay: 0.45s; }
-@keyframes wave { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(0.4); } }
-
-/* ---------- Petals ---------- */
-#petals-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9990; overflow: hidden; }
-.petal { position: absolute; top: -20px; border-radius: 50% 0 50% 0; animation: fall linear infinite; }
-@keyframes fall {
-    0%   { transform: translateY(-5vh) rotate(0deg) translateX(0); opacity: 0; }
-    10%  { opacity: 0.45; }
-    90%  { opacity: 0.45; }
-    100% { transform: translateY(105vh) rotate(360deg) translateX(80px); opacity: 0; }
+    if (document.readyState === 'complete') handleLoad();
+    else window.addEventListener('load', handleLoad);
 }
 
 /* ---------- Navbar ---------- */
-.navbar { position: fixed; top: 0; left: 0; width: 100%; padding: 25px 0; z-index: 9998; transition: var(--transition); }
-.navbar.scrolled {
-    background: rgba(255, 248, 248, 0.96);
-    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-    padding: 14px 0;
-    box-shadow: 0 2px 20px rgba(168, 100, 100, 0.06);
-    border-bottom: 1px solid var(--rose-light);
-}
-.nav-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; }
-.nav-logo { font-family: var(--font-script); font-size: 1.8rem; color: var(--rose-dark); }
-.nav-logo .ampersand { color: var(--gold); margin: 0 4px; }
-.nav-menu { display: flex; list-style: none; gap: 30px; }
-.nav-link {
-    font-family: var(--font-sans); font-size: 0.75rem; font-weight: 500;
-    letter-spacing: 2px; text-transform: uppercase;
-    color: var(--text-medium); position: relative; transition: var(--transition);
-}
-.nav-link::after {
-    content: ''; position: absolute; bottom: -4px; left: 50%;
-    transform: translateX(-50%); width: 0; height: 1.5px;
-    background: var(--rose-deep); transition: var(--transition);
-}
-.nav-link:hover::after, .nav-link.active::after { width: 100%; }
-.nav-link:hover, .nav-link.active { color: var(--rose-deep); }
-.nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
-.nav-toggle span { width: 22px; height: 2px; background: var(--text-dark); transition: var(--transition); }
+function initNavbar() {
+    const navbar    = document.getElementById('navbar');
+    const navToggle = document.getElementById('nav-toggle');
+    const navMenu   = document.getElementById('nav-menu');
+    const navLinks  = document.querySelectorAll('.nav-link');
 
-/* ---------- Hero Section ---------- */
-.hero-section {
-    position: relative; min-height: 100vh;
-    display: flex; align-items: center; justify-content: center;
-    text-align: center; background-color: var(--bg-warm);
-    overflow: hidden; padding: 120px 20px 80px;
-}
-.hero-overlay {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle at center, rgba(255,240,240,0.6) 0%, transparent 80%);
-}
-.hero-particles { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none; }
-.hero-particle {
-    position: absolute;
-    background: var(--rose-light);
-    border-radius: 50%; opacity: 0;
-    animation: sparkle 4s ease-in-out infinite;
-}
-@keyframes sparkle { 0%, 100% { opacity: 0; transform: scale(0); } 50% { opacity: 0.5; transform: scale(1); } }
-.hero-content { position: relative; z-index: 2; max-width: 800px; }
+    if (!navbar || !navToggle || !navMenu) return;
 
-.bismillah { font-size: 2rem; color: var(--gold-dark); display: block; margin-bottom: 25px; font-weight: 400; font-family: 'Noto Naskh Arabic', serif; }
-.hero-subtitle { font-family: var(--font-body); font-size: 1.2rem; letter-spacing: 1px; color: var(--text-medium); margin-bottom: 15px; }
-.hero-subtitle3 { font-family: var(--font-body); font-size: 1.15rem; color: var(--text-medium); line-height: 1.6; margin-bottom: 30px; }
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) navbar.classList.add('scrolled');
+        else navbar.classList.remove('scrolled');
+        updateActiveNav();
+    }, { passive: true });
 
-.parents-names p {
-    font-family: var(--font-display); font-size: 1.3rem;
-    color: var(--rose-dark); letter-spacing: 1px; line-height: 1.4;
-    margin-bottom: 20px; text-transform: uppercase;
-}
-.parents-names .ampersand { font-family: var(--font-script); font-size: 1.8rem; color: var(--gold); text-transform: lowercase; }
+    navToggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        navMenu.classList.toggle('active');
+        navToggle.classList.toggle('active');
+    });
 
-.hero-names { margin: 30px 0; }
-.bride-name, .groom-name {
-    font-family: var(--font-display); font-size: 2.2rem; font-weight: 500;
-    color: var(--rose-dark); letter-spacing: 1px; text-transform: uppercase;
-}
-.with-couple { font-family: var(--font-script); font-size: 1.8rem; color: var(--gold); margin: 8px 0; }
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            navToggle.classList.remove('active');
+        });
+    });
 
-.hero-date { display: flex; align-items: center; justify-content: center; gap: 15px; margin: 25px 0 15px; }
-.hero-date p { font-family: var(--font-body); font-size: 1.3rem; font-weight: 600; color: var(--text-dark); letter-spacing: 1px; }
-.date-ornament { width: 40px; height: 1px; background: var(--rose-light); }
+    function updateActiveNav() {
+        const sections  = document.querySelectorAll('section[id]');
+        const scrollPos = window.scrollY + 100;
 
-.hero-location-text { font-family: var(--font-body); font-size: 1.2rem; color: var(--text-medium); line-height: 1.6; margin-bottom: 35px; }
+        sections.forEach(section => {
+            const top    = section.offsetTop;
+            const height = section.offsetHeight;
+            const id     = section.getAttribute('id');
 
-.hero-cta {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-family: var(--font-sans); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase;
-    color: var(--rose-dark); border: 1px solid var(--rose); padding: 14px 36px;
-    border-radius: 30px; transition: var(--transition); background: transparent;
-}
-.hero-cta:hover { background: var(--rose-deep); color: var(--white); border-color: var(--rose-deep); transform: translateY(-2px); }
-
-.scroll-indicator { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); text-align: center; color: var(--text-light); }
-.mouse { width: 22px; height: 34px; border: 1.5px solid var(--rose-light); border-radius: 11px; margin: 0 auto 5px; position: relative; }
-.wheel { width: 3px; height: 6px; background: var(--rose); border-radius: 1.5px; position: absolute; top: 6px; left: 50%; transform: translateX(-50%); animation: scroll-wheel 2s infinite; }
-@keyframes scroll-wheel { 0% { opacity: 1; transform: translateX(-50%) translateY(0); } 100% { opacity: 0; transform: translateX(-50%) translateY(10px); } }
-.scroll-indicator p { font-family: var(--font-sans); font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; }
-
-/* ---------- Section Common ---------- */
-.section-container { max-width: 1100px; margin: 0 auto; padding: 90px 24px; }
-.section-header { text-align: center; margin-bottom: 50px; }
-.section-tag { font-family: var(--font-sans); font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase; color: var(--rose-deep); display: block; margin-bottom: 10px; font-weight: 500; }
-.section-header h2 { font-family: var(--font-display); font-size: 2.4rem; font-weight: 400; color: var(--text-dark); margin-bottom: 15px; }
-.ornament-divider { display: flex; align-items: center; justify-content: center; gap: 12px; }
-.ornament-divider span { width: 40px; height: 1px; background: var(--rose-light); }
-.ornament-divider i { color: var(--rose); font-size: 0.4rem; }
-
-/* ---------- Countdown ---------- */
-.countdown-section {
-    background: var(--white); position: relative; overflow: hidden;
-    border-top: 1px solid var(--rose-light); border-bottom: 1px solid var(--rose-light);
-}
-.countdown-wrapper { display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; }
-.countdown-item { text-align: center; min-width: 100px; }
-.countdown-number { font-family: var(--font-display); font-size: 3.5rem; font-weight: 500; color: var(--rose-deep); line-height: 1; margin-bottom: 8px; }
-.countdown-label { font-family: var(--font-sans); font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: var(--text-light); }
-.countdown-separator { font-family: var(--font-display); font-size: 2.5rem; color: var(--rose-light); margin-top: -15px; }
-
-/* ---------- Couple Section ---------- */
-.couple-section { background: var(--off-white); }
-.couple-wrapper { display: flex; align-items: flex-start; justify-content: center; gap: 60px; flex-wrap: wrap; }
-.couple-card { text-align: center; flex: 0 1 300px; }
-.couple-photo { position: relative; margin-bottom: 30px; }
-.photo-frame {
-    width: 180px; height: 180px; margin: 0 auto;
-    border-radius: 50%; overflow: hidden;
-    border: 2px solid var(--rose); padding: 5px;
-    background: var(--white); position: relative; z-index: 1;
-}
-.photo-placeholder {
-    width: 100%; height: 100%; border-radius: 50%;
-    background: var(--rose-pale);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 3.5rem; color: var(--rose-light); overflow: hidden;
-}
-.couple-avatar { width: 100%; height: 100%; object-fit: cover; }
-.photo-ring {
-    position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
-    width: 196px; height: 196px; border-radius: 50%;
-    border: 1px dashed var(--rose-light);
-    animation: rotate 20s linear infinite;
-}
-@keyframes rotate { 100% { transform: translateX(-50%) rotate(360deg); } }
-.couple-name { font-family: var(--font-script); font-size: 2.5rem; color: var(--rose-dark); margin-bottom: 10px; }
-.couple-parent { font-family: var(--font-body); font-size: 1.05rem; color: var(--text-medium); line-height: 1.6; }
-.couple-parent strong { color: var(--text-dark); font-weight: 600; font-size: 1.15rem; }
-.couple-heart-divider { display: flex; align-items: center; justify-content: center; padding-top: 80px; }
-.ring-icon {
-    width: 60px; height: 60px; border-radius: 50%;
-    background: var(--white); border: 1px solid var(--rose);
-    display: flex; align-items: center; justify-content: center;
-    color: var(--rose-deep); font-size: 1.3rem;
-    box-shadow: var(--shadow-soft);
+            if (scrollPos >= top && scrollPos < top + height) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + id) link.classList.add('active');
+                });
+            }
+        });
+    }
 }
 
-/* ---------- Event Section ---------- */
-.event-section { background: var(--white); position: relative; }
-.events-wrapper { display: flex; gap: 30px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
-.event-card {
-    background: var(--rose-pale); border: 1px solid var(--rose-light);
-    border-radius: 20px; padding: 40px 30px; text-align: center;
-    flex: 0 1 330px; transition: var(--transition); position: relative; word-wrap: break-word;
-}
-.event-card::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
-    background: linear-gradient(90deg, var(--rose), var(--gold));
-    border-radius: 20px 20px 0 0;
-}
-.event-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-soft); border-color: var(--rose); }
-.event-card.featured {
-    background: var(--white); border: 1px solid var(--rose);
-    box-shadow: var(--shadow-soft); flex: 0 1 400px;
-}
-.event-badge {
-    position: absolute; top: 20px; right: -35px;
-    background: linear-gradient(135deg, var(--rose-deep), var(--gold));
-    color: var(--white);
-    font-family: var(--font-sans); font-size: 0.65rem; font-weight: 600;
-    letter-spacing: 2px; text-transform: uppercase;
-    padding: 6px 40px; transform: rotate(45deg);
-}
-.event-icon { font-size: 2.2rem; color: var(--rose-deep); margin-bottom: 20px; }
-.event-card h3 { font-family: var(--font-display); font-size: 1.5rem; color: var(--rose-dark); margin-bottom: 20px; }
-.event-detail { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 12px; color: var(--text-dark); }
-.event-detail i { color: var(--gold); width: 20px; font-size: 0.9rem; }
-.event-detail p { font-family: var(--font-body); font-size: 1.05rem; }
+/* ---------- Scroll Animations ---------- */
+function initScrollAnimations() {
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -30px 0px' };
 
-.event-dresscode {
-    display: inline-flex; align-items: center; gap: 8px; margin-top: 20px;
-    padding: 8px 16px; border-radius: 8px;
-    font-family: var(--font-sans); font-size: 0.75rem; font-weight: 600; letter-spacing: 1px;
-    color: var(--rose-dark);
-}
-.event-dresscode.yellow { background: var(--theme-yellow); border: 1px solid rgba(223, 207, 157, 0.5); }
-.event-dresscode.pink   { background: var(--theme-pink);   border: 1px solid rgba(232, 164, 164, 0.4); }
-.event-dresscode i { font-size: 0.85rem; }
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => { entry.target.classList.add('animated'); }, index * 80);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
 
-.event-buttons { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 25px; }
-.event-action-btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 10px 18px; border-radius: 30px;
-    font-family: var(--font-sans); font-size: 0.7rem; font-weight: 600;
-    letter-spacing: 1px; text-transform: uppercase;
-    transition: var(--transition); background: transparent;
+    document.querySelectorAll('.animate-on-scroll, .fade-in-only').forEach(el => {
+        observer.observe(el);
+    });
 }
-.event-action-btn { border: 1px solid var(--rose); color: var(--rose-dark); }
-.event-action-btn:hover { background: var(--rose-deep); color: var(--white); border-color: var(--rose-deep); transform: translateY(-2px); box-shadow: 0 4px 15px rgba(201, 112, 112, 0.2); }
-.event-action-btn.cal-btn { border-color: var(--gold); color: var(--gold-dark); }
-.event-action-btn.waze-btn { border-color: #33ccff; color: #1ea1d0; }
-.event-action-btn.maps-btn { border-color: #ea4335; color: #d63324; }
-.event-action-btn.cal-btn:hover  { background: var(--gold-dark);  border-color: var(--gold-dark);  color: var(--white); }
-.event-action-btn.waze-btn:hover { background: #33ccff; border-color: #33ccff; color: var(--white); }
-.event-action-btn.maps-btn:hover { background: #ea4335; border-color: #ea4335; color: var(--white); }
 
-/* ---------- Contact ---------- */
-#contact { background: var(--off-white); }
-#contact .couple-card a:hover { background: var(--rose-pale); }
+/* ---------- Countdown Timer ---------- */
+function initCountdown() {
+    const weddingDate = new Date('2026-06-07T08:00:00+08:00').getTime();
+    const daysEl      = document.getElementById('days');
+    const hoursEl     = document.getElementById('hours');
+    const minutesEl   = document.getElementById('minutes');
+    const secondsEl   = document.getElementById('seconds');
 
-/* ---------- Footer ---------- */
-.footer {
-    background: var(--bg-warm); padding: 60px 30px 40px;
-    text-align: center; border-top: 1px solid var(--rose-light);
+    if (!daysEl || !hoursEl || !minutesEl || !secondsEl) return;
+
+    function updateCountdown() {
+        const now      = new Date().getTime();
+        const distance = weddingDate - now;
+
+        if (distance < 0) {
+            daysEl.textContent = '00'; hoursEl.textContent = '00';
+            minutesEl.textContent = '00'; secondsEl.textContent = '00';
+            return;
+        }
+
+        const days    = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours   = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        daysEl.textContent    = String(days).padStart(2, '0');
+        hoursEl.textContent   = String(hours).padStart(2, '0');
+        minutesEl.textContent = String(minutes).padStart(2, '0');
+        secondsEl.textContent = String(seconds).padStart(2, '0');
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
 }
-.footer-names { font-family: var(--font-script); font-size: 2.8rem; color: var(--rose-dark); margin-bottom: 15px; }
-.footer-thanks { font-family: var(--font-body); font-size: 1.1rem; color: var(--text-medium); margin-bottom: 10px; font-style: italic; }
-.footer-copyright { font-family: var(--font-sans); font-size: 0.65rem; color: var(--text-light); letter-spacing: 2px; }
+
+/* ---------- Hero Particles ---------- */
+function initHeroParticles() {
+    const container = document.getElementById('hero-particles');
+    if (!container) return;
+
+    const particleCount = window.innerWidth < 768 ? 20 : 35;
+
+    for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('hero-particle');
+        particle.style.left             = Math.random() * 100 + '%';
+        particle.style.top              = Math.random() * 100 + '%';
+        particle.style.width            = (Math.random() * 3 + 1.5) + 'px';
+        particle.style.height           = particle.style.width;
+        particle.style.animationDelay   = Math.random() * 4 + 's';
+        particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+        container.appendChild(particle);
+    }
+}
+
+/* ---------- Floating Petals ---------- */
+function initFloatingPetals() {
+    const container = document.getElementById('petals-container');
+    if (!container) return;
+
+    function createPetal() {
+        if (document.hidden) return;
+
+        const petal = document.createElement('div');
+        petal.classList.add('petal');
+
+        const size = Math.random() * 12 + 6;
+        petal.style.width             = size + 'px';
+        petal.style.height            = size + 'px';
+        petal.style.left              = Math.random() * 100 + '%';
+        petal.style.animationDuration = (Math.random() * 5 + 6) + 's';
+        petal.style.animationDelay    = Math.random() * 1 + 's';
+        petal.style.opacity           = Math.random() * 0.25 + 0.1;
+
+        // Pink Rose Gold petals — campuran rose & gold
+        const hue = Math.random() > 0.5
+            ? `radial-gradient(ellipse at center, rgba(232,164,164,0.75), rgba(201,112,112,0.4))`
+            : `radial-gradient(ellipse at center, rgba(223,207,157,0.7), rgba(179,146,70,0.4))`;
+        petal.style.background = hue;
+
+        container.appendChild(petal);
+        petal.addEventListener('animationend', () => { petal.remove(); });
+    }
+
+    const initialPetals = window.innerWidth < 768 ? 3 : 6;
+    for (let i = 0; i < initialPetals; i++) { setTimeout(createPetal, i * 500); }
+    setInterval(createPetal, window.innerWidth < 768 ? 3000 : 2000);
+}
+
+/* ---------- Music Player (Bypass iOS restriction) ---------- */
+function initMusicPlayer() {
+    const musicBtn = document.getElementById('music-toggle');
+    const audio    = document.getElementById('bg-music');
+    if (!musicBtn || !audio) return;
+
+    let isPlaying  = false;
+    let audioContext, oscillator, gainNode, melodyInterval;
+    let usingWebAudio = false;
+
+    function playWeddingMusic() {
+        if (isPlaying) return;
+        audio.play().then(() => {
+            isPlaying = true;
+            musicBtn.classList.add('playing');
+            usingWebAudio = false;
+        }).catch(() => {
+            if (!isPlaying) playWebAudioMelody();
+        });
+    }
+
+    document.addEventListener('click',      playWeddingMusic, { once: true });
+    document.addEventListener('touchstart', playWeddingMusic, { once: true });
+
+    musicBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (!isPlaying) {
+            audio.play().then(() => {
+                isPlaying = true;
+                musicBtn.classList.add('playing');
+                usingWebAudio = false;
+            }).catch(() => { playWebAudioMelody(); });
+        } else {
+            if (usingWebAudio) stopWebAudioMelody();
+            else audio.pause();
+            isPlaying = false;
+            musicBtn.classList.remove('playing');
+        }
+    });
+
+    function playWebAudioMelody() {
+        try {
+            audioContext  = new (window.AudioContext || window.webkitAudioContext)();
+            isPlaying     = true;
+            musicBtn.classList.add('playing');
+            usingWebAudio = true;
+
+            const notes = [
+                { freq: 523.25, dur: 0.5 }, { freq: 587.33, dur: 0.5 }, { freq: 659.25, dur: 0.75 },
+                { freq: 523.25, dur: 0.25 }, { freq: 659.25, dur: 0.5 }, { freq: 698.46, dur: 0.5 },
+                { freq: 783.99, dur: 1.0  }, { freq: 783.99, dur: 0.5 }, { freq: 880.00, dur: 0.5 }
+            ];
+
+            let noteIndex = 0;
+            function playNote() {
+                if (!isPlaying || !audioContext) return;
+                const note = notes[noteIndex % notes.length];
+                if (note.freq > 0) {
+                    oscillator = audioContext.createOscillator();
+                    gainNode   = audioContext.createGain();
+                    oscillator.type = 'sine';
+                    oscillator.frequency.setValueAtTime(note.freq, audioContext.currentTime);
+                    gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+                    gainNode.gain.linearRampToValueAtTime(0.04, audioContext.currentTime + 0.05);
+                    gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + note.dur);
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioContext.destination);
+                    oscillator.start(audioContext.currentTime);
+                    oscillator.stop(audioContext.currentTime + note.dur);
+                }
+                noteIndex++;
+                melodyInterval = setTimeout(playNote, note.dur * 1000);
+            }
+            playNote();
+        } catch (err) { console.log(err); }
+    }
+
+    function stopWebAudioMelody() {
+        if (melodyInterval) clearTimeout(melodyInterval);
+        if (audioContext) { audioContext.close(); audioContext = null; }
+    }
+}
 
 /* ---------- Back to Top ---------- */
-.back-to-top {
-    position: fixed;
-    bottom: calc(25px + env(safe-area-inset-bottom));
-    right: calc(25px + env(safe-area-inset-right));
-    width: 44px; height: 44px; border-radius: 50%;
-    background: linear-gradient(135deg, var(--rose-deep), var(--gold-dark));
-    color: var(--white); border: none; font-size: 0.9rem;
-    cursor: pointer; opacity: 0; visibility: hidden;
-    transition: var(--transition); box-shadow: var(--shadow-soft); z-index: 9999;
-}
-.back-to-top.visible { opacity: 1; visibility: visible; }
-.back-to-top:hover { transform: translateY(-3px); }
+function initBackToTop() {
+    const btn = document.getElementById('back-to-top');
+    if (!btn) return;
 
-/* ---------- Animations ---------- */
-.animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
-.animate-on-scroll.animated { opacity: 1; transform: translateY(0); }
-.fade-in-only { opacity: 0; transition: opacity 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-.fade-in-only.animated { opacity: 1; }
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 400) btn.classList.add('visible');
+        else btn.classList.remove('visible');
+    }, { passive: true });
 
-/* ---------- Responsive ---------- */
-@media (max-width: 968px) {
-    .nav-toggle { display: flex; }
-    .nav-menu {
-        position: fixed; top: 0; right: -100%; width: 280px; height: 100vh;
-        background: var(--white); flex-direction: column;
-        padding: calc(80px + env(safe-area-inset-top)) 40px 40px;
-        gap: 20px; transition: var(--transition);
-        box-shadow: -10px 0 30px rgba(168, 100, 100, 0.06);
-    }
-    .nav-menu.active { right: 0; }
-    .nav-menu .nav-link { color: var(--text-dark); font-size: 0.9rem; }
-}
-
-@media (max-width: 600px) {
-    .bride-name, .groom-name { font-size: 1.8rem; }
-    .parents-names p { font-size: 1.15rem; }
-    .bismillah { font-size: 1.5rem; }
-    .section-container { padding: 70px 20px; }
-    .section-header h2 { font-size: 1.8rem; }
-    .countdown-wrapper { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; padding: 0 5px; }
-    .countdown-item { min-width: unset; }
-    .countdown-number { font-size: 2rem; }
-    .countdown-separator { display: none; }
-    .event-card { padding: 30px 20px; width: 100%; }
-    .footer-names { font-size: 2.2rem; }
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 }
