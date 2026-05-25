@@ -1,247 +1,460 @@
 <!DOCTYPE html>
 <html lang="ms">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    
-    <meta property="og:title" content="Walimatul Urus Aswana & Hafiz">
-    <meta property="og:description" content="Mengalu-alukan kehadiran Dato'/Datin/Tuan/Puan/Encik/Cik ke majlis perkahwinan anakanda kami pada 7 Jun 2026.">
-    <meta property="og:image" content="assets/images/og-thumbnail.jpg">
-    <meta property="og:type" content="website">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Jemputan Walimatul Urus Aswana & Hafiz — 7 Jun 2026, Laman Kasih, Kg. Gayang, Tuaran, Sabah"/>
+    <title>Walimatul Urus — Aswana & Hafiz</title>
 
-    <title>Walimatul Urus Aswana & Hafiz</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap"></noscript>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&family=Noto+Naskh+Arabic&display=swap" rel="stylesheet"/>
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+    <!-- Main CSS (Pink Rose Gold) -->
+    <link rel="stylesheet" href="style.css"/>
+
+    <!-- Hero override — ganti image background -->
+    <style>
+        .hero-section {
+            background-image: url('images/img12.png');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: scroll;
+        }
+
+        /* Overlay lembut kemerahan supaya teks kelihatan */
+        .hero-overlay {
+            background: linear-gradient(
+                to bottom,
+                rgba(15, 5, 8, 0.42) 0%,
+                rgba(25, 8, 14, 0.30) 50%,
+                rgba(15, 5, 8, 0.52) 100%
+            ) !important;
+        }
+
+        /* Semua teks hero jadi putih */
+        .bismillah,
+        .hero-subtitle,
+        .hero-subtitle3,
+        .hero-location-text,
+        .bride-name, .groom-name,
+        .with-couple,
+        .hero-date p,
+        .parents-names p,
+        .parents-names .ampersand,
+        .scroll-indicator p { color: #fff !important; }
+
+        .hero-date p { color: rgba(255,255,255,0.92) !important; }
+        .date-ornament { background: rgba(255,220,220,0.5) !important; }
+
+        .hero-cta {
+            border-color: rgba(255,220,220,0.75) !important;
+            color: #fff !important;
+        }
+        .hero-cta:hover {
+            background: rgba(232,164,164,0.25) !important;
+            border-color: #fff !important;
+        }
+
+        .scroll-indicator { color: rgba(255,255,255,0.6) !important; }
+        .mouse { border-color: rgba(255,220,220,0.45) !important; }
+        .wheel { background: rgba(255,220,220,0.8) !important; }
+
+        /* Bismillah — Arabic font */
+        .bismillah {
+            font-family: 'Noto Naskh Arabic', serif !important;
+            font-size: 2.2rem !important;
+        }
+
+        /* Gold accent kekal untuk & dan elemen khas */
+        .parents-names .ampersand { color: #dfcf9d !important; }
+        .with-couple { color: #dfcf9d !important; }
+    </style>
 </head>
 <body>
 
-    <div id="preloader">
-        <div class="loader">
-            <div class="heart-loader"><i class="fas fa-heart"></i></div>
-            <p class="loader-text">Aswana & Hafiz</p>
+<!-- ══ PRELOADER ══ -->
+<div id="preloader">
+    <div>
+        <div class="heart-loader">♡</div>
+        <div class="loader-text">Aswana & Hafiz</div>
+    </div>
+</div>
+
+<!-- ══ PETALS ══ -->
+<div id="petals-container"></div>
+
+<!-- ══ MUSIC ══ -->
+<button class="music-btn" id="music-toggle" aria-label="Toggle Music">
+    <i class="fa-solid fa-music"></i>
+    <div class="music-waves">
+        <span></span><span></span><span></span><span></span>
+    </div>
+</button>
+<audio id="bg-music" loop preload="none">
+    <source src="music/lagu.mp3" type="audio/mpeg"/>
+</audio>
+
+<!-- ══ NAVBAR ══ -->
+<nav class="navbar" id="navbar">
+    <div class="nav-container">
+        <a href="#home" class="nav-logo">Aswana <span class="ampersand">&</span> Hafiz</a>
+        <ul class="nav-menu" id="nav-menu">
+            <li><a href="#home"    class="nav-link">Home</a></li>
+            <li><a href="#couple"  class="nav-link">Pasangan</a></li>
+            <li><a href="#event"   class="nav-link">Majlis</a></li>
+            <li><a href="#contact" class="nav-link">Hubungi</a></li>
+        </ul>
+        <div class="nav-toggle" id="nav-toggle">
+            <span></span><span></span><span></span>
         </div>
     </div>
+</nav>
 
-    <div id="music-toggle" class="music-btn" title="Play/Pause Music">
-        <i class="fas fa-music"></i>
-        <div class="music-waves">
-            <span></span><span></span><span></span><span></span>
+<!-- ══════════════════════════════════════
+     HERO
+══════════════════════════════════════ -->
+<section class="hero-section" id="home">
+    <div class="hero-overlay"></div>
+    <div class="hero-particles" id="hero-particles"></div>
+
+    <div class="hero-content fade-in-only">
+
+        <span class="bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</span>
+
+        <p class="hero-subtitle">Assalamualaikum w.b.t &amp; Salam Sejahtera</p>
+        <p class="hero-subtitle" style="margin-bottom:6px;">Dengan rasa penuh kesyukuran &amp; hormatnya</p>
+
+        <div class="parents-names">
+            <p>MADUNI BIN MAJIDIN <span class="ampersand">&</span> HALIAH BINTI IDRIS</p>
         </div>
+
+        <p class="hero-subtitle3">
+            Mengalu-alukan kehadiran<br/>
+            <strong>Dato'/Datin &nbsp;·&nbsp; Tuan/Puan &nbsp;·&nbsp; Encik/Cik</strong><br/>
+            ke majlis perkahwinan anak bongsu kami
+        </p>
+
+        <div class="hero-names">
+            <div class="bride-name">Aswana Binti Maduni</div>
+            <div class="with-couple">dengan pasangannya</div>
+            <div class="groom-name">Muhammad Hafiz Bin Amiril</div>
+        </div>
+
+        <div class="hero-date">
+            <div class="date-ornament"></div>
+            <p>7 Jun 2026 &nbsp;·&nbsp; Ahad &nbsp;·&nbsp; 21 Zulhijah 1447H</p>
+            <div class="date-ornament"></div>
+        </div>
+
+        <p class="hero-location-text">
+            Laman Kasih, Kg. Gayang, Tuaran, Sabah
+        </p>
+
+        <a href="#event" class="hero-cta">
+            <i class="fa-regular fa-calendar"></i> Atur Cara Majlis
+        </a>
+
     </div>
 
-    <div id="petals-container"></div>
+    <div class="scroll-indicator">
+        <div class="mouse"><div class="wheel"></div></div>
+        <p>Scroll</p>
+    </div>
+</section>
 
-    <nav id="navbar" class="navbar">
-        <div class="nav-container">
-            <a href="#home" class="nav-logo">A <span class="ampersand">&</span> H</a>
-            <div class="nav-toggle" id="nav-toggle">
-                <span></span><span></span><span></span>
-            </div>
-            <ul class="nav-menu" id="nav-menu">
-                <li><a href="#home" class="nav-link active">Utama</a></li>
-                <li><a href="#couple" class="nav-link">Pasangan</a></li>
-                <li><a href="#event" class="nav-link">Majlis</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <section id="home" class="hero-section">
-        <div class="hero-overlay"></div>
-        <div class="hero-particles" id="hero-particles"></div>
-        <div class="hero-content">
-            <div class="hero-badge animate-on-scroll">
-                <span class="bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</span>
-            </div>
-            <p class="hero-subtitle animate-on-scroll">Assalamualaikum w.b.t & Salam Sejahtera<br>Dengan rasa penuh kesyukuran & hormatnya</p>
-            
-            <div class="parents-names animate-on-scroll">
-                <p>MADUNI BIN MAJIDIN<br><span class="ampersand">&</span><br>HALIAH BINTI IDRIS</p>
-            </div>
-
-            <p class="hero-subtitle3 animate-on-scroll">Mengalu-alukan kehadiran<br>Dato'/Datin/Tuan/Puan/Encik/Cik<br>ke majlis perkahwinan anak bongsu kami</p>
-            
-            <div class="hero-names fade-in-only">
-                <h1 class="bride-name">Aswana Binti Maduni</h1>
-                <p class="with-couple">dengan pasangannya</p>
-                <h1 class="groom-name">Muhammad Hafiz Bin Amiril</h1>
-            </div>
-            
-            <div class="hero-date animate-on-scroll">
-                <div class="date-ornament left"></div>
-                <p>7 Jun 2026 • 21 Zulhijah 1447H</p>
-                <div class="date-ornament right"></div>
-            </div>
-            
-            <p class="hero-location-text animate-on-scroll">Bertempat di kediaman kami Laman Kasih<br>Kg. Gayang, Tuaran</p>
-            
-            <a href="#event" class="hero-cta animate-on-scroll">
-                <span>Atur Cara Majlis</span>
-                <i class="fas fa-chevron-down"></i>
-            </a>
-        </div>
-        <div class="scroll-indicator">
-            <div class="mouse"><div class="wheel"></div></div>
-            <p>Scroll</p>
-        </div>
-    </section>
-
-    <section id="countdown-section" class="countdown-section">
-        <div class="section-container">
-            <div class="section-header animate-on-scroll">
-                <span class="section-tag">Menghitung Hari</span>
-                <h2>Menuju Hari Bahagia</h2>
-                <div class="ornament-divider">
-                    <span></span><i class="fas fa-diamond"></i><span></span>
-                </div>
-            </div>
-            <div class="countdown-wrapper animate-on-scroll">
-                <div class="countdown-item">
-                    <div class="countdown-number" id="days">00</div>
-                    <div class="countdown-label">Hari</div>
-                </div>
-                <div class="countdown-separator">:</div>
-                <div class="countdown-item">
-                    <div class="countdown-number" id="hours">00</div>
-                    <div class="countdown-label">Jam</div>
-                </div>
-                <div class="countdown-separator">:</div>
-                <div class="countdown-item">
-                    <div class="countdown-number" id="minutes">00</div>
-                    <div class="countdown-label">Minit</div>
-                </div>
-                <div class="countdown-separator">:</div>
-                <div class="countdown-item">
-                    <div class="countdown-number" id="seconds">00</div>
-                    <div class="countdown-label">Saat</div>
-                </div>
+<!-- ══════════════════════════════════════
+     COUNTDOWN
+══════════════════════════════════════ -->
+<section class="countdown-section" id="countdown">
+    <div class="section-container">
+        <div class="section-header animate-on-scroll">
+            <span class="section-tag">Menghitung Hari</span>
+            <h2>Menuju Hari Bahagia</h2>
+            <div class="ornament-divider">
+                <span></span>
+                <i class="fa-solid fa-diamond"></i>
+                <span></span>
             </div>
         </div>
-    </section>
-
-    <section id="couple" class="couple-section">
-        <div class="section-container">
-            <div class="section-header animate-on-scroll">
-                <span class="section-tag">Raja Sehari</span>
-                <h2>Pasangan Pengantin</h2>
-                <div class="ornament-divider">
-                    <span></span><i class="fas fa-diamond"></i><span></span>
-                </div>
+        <div class="countdown-wrapper animate-on-scroll">
+            <div class="countdown-item">
+                <div class="countdown-number" id="days">00</div>
+                <div class="countdown-label">Hari</div>
             </div>
-            <div class="couple-wrapper">
-                <div class="couple-card animate-on-scroll">
-                    <div class="couple-photo">
-                        <div class="photo-frame">
-                            <div class="photo-placeholder bride-photo">
-                                <img src="assets/images/bride-avatar.png" alt="Aswana" class="couple-avatar" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                                <i class="fas fa-user fallback-icon" style="display: none;"></i>
-                            </div>
+            <div class="countdown-separator">:</div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="hours">00</div>
+                <div class="countdown-label">Jam</div>
+            </div>
+            <div class="countdown-separator">:</div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="minutes">00</div>
+                <div class="countdown-label">Minit</div>
+            </div>
+            <div class="countdown-separator">:</div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="seconds">00</div>
+                <div class="countdown-label">Saat</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     COUPLE
+══════════════════════════════════════ -->
+<section class="couple-section" id="couple">
+    <div class="section-container">
+        <div class="section-header animate-on-scroll">
+            <span class="section-tag">Raja Sehari</span>
+            <h2>Pasangan Pengantin</h2>
+            <div class="ornament-divider">
+                <span></span>
+                <i class="fa-solid fa-diamond"></i>
+                <span></span>
+            </div>
+        </div>
+
+        <div class="couple-wrapper">
+
+            <!-- Bride -->
+            <div class="couple-card animate-on-scroll">
+                <div class="couple-photo">
+                    <div class="photo-frame">
+                        <div class="photo-placeholder">
+                            <!-- Tukar kepada: <img src="images/wana.jpg" class="couple-avatar" alt="Aswana"/> -->
+                            🌸
                         </div>
-                        <div class="photo-ring"></div>
                     </div>
-                    <h3 class="couple-name">Aswana</h3>
-                    <p class="couple-parent">Puteri kepada<br><strong>Maduni bin Majidin</strong><br>&<br><strong>Haliah binti Idris</strong></p>
+                    <div class="photo-ring"></div>
                 </div>
-
-                <div class="couple-heart-divider animate-on-scroll">
-                    <div class="ring-icon"><i class="fas fa-ring"></i></div>
+                <div class="couple-name">Aswana</div>
+                <div class="couple-parent">
+                    Puteri kepada<br/>
+                    <strong>Maduni bin Majidin</strong><br/>
+                    &amp; <strong>Haliah binti Idris</strong>
                 </div>
+            </div>
 
-                <div class="couple-card animate-on-scroll">
-                    <div class="couple-photo">
-                        <div class="photo-frame">
-                            <div class="photo-placeholder groom-photo">
-                                <img src="assets/images/groom-avatar.png" alt="Hafiz" class="couple-avatar" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                                <i class="fas fa-user-tie fallback-icon" style="display: none;"></i>
-                            </div>
+            <!-- Divider -->
+            <div class="couple-heart-divider animate-on-scroll">
+                <div class="ring-icon">
+                    <i class="fa-solid fa-ring"></i>
+                </div>
+            </div>
+
+            <!-- Groom -->
+            <div class="couple-card animate-on-scroll">
+                <div class="couple-photo">
+                    <div class="photo-frame">
+                        <div class="photo-placeholder">
+                            <!-- Tukar kepada: <img src="images/hafiz.jpg" class="couple-avatar" alt="Hafiz"/> -->
+                            🌿
                         </div>
-                        <div class="photo-ring"></div>
                     </div>
-                    <h3 class="couple-name">Hafiz</h3>
-                    <p class="couple-parent">Putera kepada<br><strong>Amiril bin ________</strong><br>&<br><strong>________ binti ________</strong></p>
+                    <div class="photo-ring"></div>
+                </div>
+                <div class="couple-name">Hafiz</div>
+                <div class="couple-parent">
+                    Putera kepada<br/>
+                    <strong>Amiril bin Yusman</strong><br/>
+                    &amp; <strong>Norizah binti Sulaiman</strong>
                 </div>
             </div>
+
         </div>
-    </section>
+    </div>
+</section>
 
-    <section id="event" class="event-section">
-        <div class="section-container">
-            <div class="section-header animate-on-scroll">
-                <span class="section-tag">Butiran Majlis</span>
-                <h2>Atur Cara Majlis</h2>
-                <div class="ornament-divider">
-                    <span></span><i class="fas fa-diamond"></i><span></span>
-                </div>
-            </div>
-            
-            <div class="events-wrapper">
-                
-                <div class="event-card animate-on-scroll">
-                    <div class="event-icon"><i class="fas fa-book-open"></i></div>
-                    <h3>Khatam Al-Quran</h3>
-                    <div class="event-detail"><i class="far fa-calendar"></i><p>6 Jun 2026 (Sabtu)</p></div>
-                    <div class="event-detail"><i class="far fa-clock"></i><p>1:00 Petang</p></div>
-                    <div class="event-detail"><i class="fas fa-map-marker-alt"></i><p>Laman Kasih, Kg. Gayang</p></div>
-                </div>
-
-                <div class="event-card animate-on-scroll">
-                    <div class="event-icon"><i class="fas fa-mosque"></i></div>
-                    <h3>Akad Nikah</h3>
-                    <div class="event-detail"><i class="far fa-calendar"></i><p>6 Jun 2026 (Sabtu)</p></div>
-                    <div class="event-detail"><i class="far fa-clock"></i><p>8:00 Malam</p></div>
-                    <div class="event-detail"><i class="fas fa-map-marker-alt"></i><p>Laman Kasih, Kg. Gayang</p></div>
-                    <div class="event-dresscode yellow"><i class="fas fa-tshirt"></i> Tema: Soft Yellow</div>
-                </div>
-
-                <div class="event-card featured animate-on-scroll">
-                    <div class="event-badge">Majlis Utama</div>
-                    <div class="event-icon"><i class="fas fa-rings-wedding"></i><i class="fas fa-glass-cheers"></i></div>
-                    <h3>Walimatul Urus</h3>
-                    <div class="event-detail"><i class="far fa-calendar"></i><p>7 Jun 2026 (Ahad)</p></div>
-                    <div class="event-detail"><i class="far fa-clock"></i><p>Jamuan: 8:00 Pagi - 5:00 Ptgn<br>Sanding: 1:00 Petang</p></div>
-                    <div class="event-detail"><i class="fas fa-map-marker-alt"></i><p>Laman Kasih, Kg. Gayang, Tuaran</p></div>
-                    <div class="event-dresscode pink"><i class="fas fa-tshirt"></i> Tema: Soft Pink</div>
-                    
-                    <div class="event-buttons">
-                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Walimatul+Urus+Aswana+%26+Hafiz&dates=20260607T000000Z/20260607T090000Z&details=Sudi+hadir+ke+Majlis+Perkahwinan+Aswana+%26+Hafiz&location=Laman+Kasih,+Kg.+Gayang,+Tuaran,+Sabah" target="_blank" class="event-action-btn cal-btn">
-                            <i class="far fa-calendar-plus"></i> Kalendar
-                        </a>
-                        <a href="https://maps.google.com/?q=Laman+Kasih,+Kampung+Gayang,+Tuaran,+Sabah" target="_blank" class="event-action-btn maps-btn">
-                            <i class="fas fa-map-marked-alt"></i> Maps
-                        </a>
-                        <a href="https://waze.com/ul?q=Laman+Kasih+Kampung+Gayang+Tuaran&navigate=yes" target="_blank" class="event-action-btn waze-btn">
-                            <i class="fab fa-waze"></i> Waze
-                        </a>
-                    </div>
-                </div>
-
+<!-- ══════════════════════════════════════
+     EVENT
+══════════════════════════════════════ -->
+<section class="event-section" id="event">
+    <div class="section-container">
+        <div class="section-header animate-on-scroll">
+            <span class="section-tag">Jemputan</span>
+            <h2>Atur Cara Majlis</h2>
+            <div class="ornament-divider">
+                <span></span>
+                <i class="fa-solid fa-diamond"></i>
+                <span></span>
             </div>
         </div>
-    </section>
 
-    <footer class="footer">
-        <div class="footer-content">
-            <h2 class="footer-names">Aswana & Hafiz</h2>
-            <p class="footer-thanks">Kehadiran semua amat kami hargai.<br>Moga bersatu doa dan restu dalam kasih Ilahi.</p>
-            <p class="footer-copyright">© 2026 Aswana & Hafiz</p>
+        <div class="events-wrapper">
+
+            <!-- Khatam Al-Quran -->
+            <div class="event-card animate-on-scroll">
+                <div class="event-icon"><i class="fa-solid fa-book-open"></i></div>
+                <h3>Khatam Al-Quran</h3>
+                <div class="event-detail">
+                    <i class="fa-regular fa-calendar"></i>
+                    <p>Sabtu, 6 Jun 2026</p>
+                </div>
+                <div class="event-detail">
+                    <i class="fa-regular fa-clock"></i>
+                    <p>1:00 Petang</p>
+                </div>
+                <div class="event-detail">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <p>Laman Kasih, Kg. Gayang, Tuaran</p>
+                </div>
+                <div class="event-buttons">
+                    <a class="event-action-btn maps-btn"
+                       href="https://maps.google.com/?q=Laman+Kasih,+Kampung+Gayang,+Tuaran,+Sabah"
+                       target="_blank">
+                        <i class="fa-brands fa-google"></i> Maps
+                    </a>
+                    <a class="event-action-btn waze-btn"
+                       href="https://waze.com/ul?q=Laman+Kasih+Kampung+Gayang+Tuaran&navigate=yes"
+                       target="_blank">
+                        <i class="fa-solid fa-car"></i> Waze
+                    </a>
+                </div>
+            </div>
+
+            <!-- Akad Nikah -->
+            <div class="event-card animate-on-scroll">
+                <div class="event-icon"><i class="fa-solid fa-mosque"></i></div>
+                <h3>Akad Nikah</h3>
+                <div class="event-detail">
+                    <i class="fa-regular fa-calendar"></i>
+                    <p>Sabtu, 6 Jun 2026</p>
+                </div>
+                <div class="event-detail">
+                    <i class="fa-regular fa-clock"></i>
+                    <p>8:00 Malam</p>
+                </div>
+                <div class="event-detail">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <p>Laman Kasih, Kg. Gayang, Tuaran</p>
+                </div>
+                <div class="event-dresscode yellow">
+                    <i class="fa-solid fa-shirt"></i> Tema: Soft Yellow
+                </div>
+                <div class="event-buttons">
+                    <a class="event-action-btn maps-btn"
+                       href="https://maps.google.com/?q=Laman+Kasih,+Kampung+Gayang,+Tuaran,+Sabah"
+                       target="_blank">
+                        <i class="fa-brands fa-google"></i> Maps
+                    </a>
+                    <a class="event-action-btn waze-btn"
+                       href="https://waze.com/ul?q=Laman+Kasih+Kampung+Gayang+Tuaran&navigate=yes"
+                       target="_blank">
+                        <i class="fa-solid fa-car"></i> Waze
+                    </a>
+                </div>
+            </div>
+
+            <!-- Walimatul Urus (featured) -->
+            <div class="event-card featured animate-on-scroll">
+                <div class="event-badge">Utama</div>
+                <div class="event-icon"><i class="fa-solid fa-rings-wedding"></i></div>
+                <h3>Walimatul Urus</h3>
+                <div class="event-detail">
+                    <i class="fa-regular fa-calendar"></i>
+                    <p>Ahad, 7 Jun 2026 — 21 Zulhijah 1447H</p>
+                </div>
+                <div class="event-detail">
+                    <i class="fa-regular fa-clock"></i>
+                    <p>Jamuan: 8:00 Pagi – 5:00 Petang</p>
+                </div>
+                <div class="event-detail">
+                    <i class="fa-regular fa-clock"></i>
+                    <p>Sanding: 1:00 Petang</p>
+                </div>
+                <div class="event-detail">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <p>Laman Kasih, Kg. Gayang, Tuaran, Sabah</p>
+                </div>
+                <div class="event-dresscode pink">
+                    <i class="fa-solid fa-shirt"></i> Tema: Soft Pink
+                </div>
+                <div class="event-buttons">
+                    <a class="event-action-btn cal-btn"
+                       href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Walimatul+Urus+Aswana+%26+Hafiz&dates=20260607T000000Z/20260607T090000Z&details=Majlis+Perkahwinan+Aswana+%26+Hafiz&location=Laman+Kasih,+Kg.+Gayang,+Tuaran,+Sabah"
+                       target="_blank">
+                        <i class="fa-regular fa-calendar-plus"></i> Kalendar
+                    </a>
+                    <a class="event-action-btn maps-btn"
+                       href="https://maps.google.com/?q=Laman+Kasih,+Kampung+Gayang,+Tuaran,+Sabah"
+                       target="_blank">
+                        <i class="fa-brands fa-google"></i> Maps
+                    </a>
+                    <a class="event-action-btn waze-btn"
+                       href="https://waze.com/ul?q=Laman+Kasih+Kampung+Gayang+Tuaran&navigate=yes"
+                       target="_blank">
+                        <i class="fa-solid fa-car"></i> Waze
+                    </a>
+                </div>
+            </div>
+
         </div>
-    </footer>
+    </div>
+</section>
 
-    <button id="back-to-top" class="back-to-top" title="Kembali ke atas">
-        <i class="fas fa-chevron-up"></i>
-    </button>
+<!-- ══════════════════════════════════════
+     CONTACT
+══════════════════════════════════════ -->
+<section id="contact" style="background:var(--off-white);">
+    <div class="section-container">
+        <div class="section-header animate-on-scroll">
+            <span class="section-tag">Pertanyaan</span>
+            <h2>Hubungi Kami</h2>
+            <div class="ornament-divider">
+                <span></span>
+                <i class="fa-solid fa-diamond"></i>
+                <span></span>
+            </div>
+        </div>
 
-    <audio id="bg-music" loop preload="auto" playsinline webkit-playsinline>
-        <source src="assets/music/wedding-song.mp3" type="audio/mpeg">
-    </audio>
+        <div class="couple-wrapper" style="gap:30px;">
+            <div class="couple-card animate-on-scroll" style="flex:0 1 240px;">
+                <div class="couple-name" style="font-size:1.8rem;">Aswana</div>
+                <p class="couple-parent" style="margin-bottom:1.2rem;">Pengantin Perempuan</p>
+                <a href="tel:+60xxxxxxxxx"
+                   style="display:inline-flex;align-items:center;gap:8px;padding:10px 24px;border-radius:30px;border:1px solid var(--rose);color:var(--rose-dark);font-family:var(--font-sans);font-size:0.75rem;letter-spacing:1px;text-transform:uppercase;transition:all 0.3s;">
+                    <i class="fa-solid fa-phone"></i> Hubungi
+                </a>
+            </div>
+            <div class="couple-heart-divider animate-on-scroll">
+                <div class="ring-icon"><i class="fa-solid fa-heart"></i></div>
+            </div>
+            <div class="couple-card animate-on-scroll" style="flex:0 1 240px;">
+                <div class="couple-name" style="font-size:1.8rem;">Hafiz</div>
+                <p class="couple-parent" style="margin-bottom:1.2rem;">Pengantin Lelaki</p>
+                <a href="tel:+60xxxxxxxxx"
+                   style="display:inline-flex;align-items:center;gap:8px;padding:10px 24px;border-radius:30px;border:1px solid var(--rose);color:var(--rose-dark);font-family:var(--font-sans);font-size:0.75rem;letter-spacing:1px;text-transform:uppercase;transition:all 0.3s;">
+                    <i class="fa-solid fa-phone"></i> Hubungi
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
 
-    <script src="js/main.js"></script>
+<!-- ══════════════════════════════════════
+     FOOTER
+══════════════════════════════════════ -->
+<footer class="footer">
+    <div class="footer-names">Aswana &amp; Hafiz</div>
+    <p class="footer-thanks">
+        Kehadiran semua amat kami hargai.<br/>
+        Moga bersatu doa dan restu dalam kasih Ilahi.
+    </p>
+    <p class="footer-copyright">© 2026 ASWANA &amp; HAFIZ · LAMAN KASIH, KG. GAYANG, TUARAN, SABAH</p>
+</footer>
+
+<!-- Back to Top -->
+<button class="back-to-top" id="back-to-top" aria-label="Kembali ke atas">
+    <i class="fa-solid fa-chevron-up"></i>
+</button>
+
+<script src="main.js"></script>
 </body>
 </html>
